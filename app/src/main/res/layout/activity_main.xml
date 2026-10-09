@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="10dp" android:fitsSystemWindows="true">
+<TextView android:id="@+id/status" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Status: stopped" android:textSize="18sp" />
+<SurfaceView android:id="@+id/guestSurface" android:layout_width="match_parent" android:layout_height="220dp" android:layout_marginTop="6dp" />
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+<Button android:id="@+id/filesButton" android:singleLine="true" android:maxLines="1" android:textSize="11sp" android:minWidth="0dp" android:paddingLeft="2dp" android:paddingRight="2dp" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Image"/>
+<Button android:id="@+id/startButton" android:singleLine="true" android:maxLines="1" android:textSize="11sp" android:minWidth="0dp" android:paddingLeft="2dp" android:paddingRight="2dp" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Start"/>
+<Button android:id="@+id/stopButton" android:singleLine="true" android:maxLines="1" android:textSize="11sp" android:minWidth="0dp" android:paddingLeft="2dp" android:paddingRight="2dp" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Stop"/>
+</LinearLayout>
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+<Button android:id="@+id/inspectButton" android:singleLine="true" android:maxLines="1" android:textSize="11sp" android:minWidth="0dp" android:paddingLeft="2dp" android:paddingRight="2dp" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Inspect"/>
+<Button android:id="@+id/exportLogButton" android:singleLine="true" android:maxLines="1" android:textSize="11sp" android:minWidth="0dp" android:paddingLeft="2dp" android:paddingRight="2dp" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="EXPORT LOG"/>
+<Button android:id="@+id/clearLogButton" android:singleLine="true" android:maxLines="1" android:textSize="11sp" android:minWidth="0dp" android:paddingLeft="2dp" android:paddingRight="2dp" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Clear Log"/>
+</LinearLayout>
+</LinearLayout>
+<TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="VM Log - Stage 68 Cuttlefish (saved continuously)" android:textStyle="bold" android:paddingTop="5dp"/>
+<ScrollView android:id="@+id/logScroll" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true" android:clipToPadding="false" android:paddingBottom="48dp"><TextView android:id="@+id/log" android:layout_width="match_parent" android:layout_height="wrap_content" android:textIsSelectable="true" android:textSize="12sp" android:typeface="monospace"/></ScrollView>
+</LinearLayout>
