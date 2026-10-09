@@ -1,0 +1,10 @@
+package com.alex.guestvm;
+import java.io.*;
+public final class CuttlefishProbe {
+ private CuttlefishProbe(){}
+ private static long u32(byte[] b,int o){return ((long)b[o]&255)|(((long)b[o+1]&255)<<8)|(((long)b[o+2]&255)<<16)|(((long)b[o+3]&255)<<24);}
+ private static String ascii(byte[] b,int o,int n){try{return new String(b,o,n,"US-ASCII");}catch(Exception e){return "";}}
+ private static byte[] head(File f,int n)throws IOException{RandomAccessFile r=new RandomAccessFile(f,"r");try{byte[] b=new byte[(int)Math.min((long)n,r.length())];r.readFully(b);return b;}finally{r.close();}}
+ private static String image(File f){if(!f.isFile())return f.getName()+": MISSING\n";try{byte[] b=head(f,4096);StringBuilder s=new StringBuilder();s.append(f.getName()).append(": ").append(f.length()).append(" bytes");if(b.length>=8&&"ANDROID!".equals(ascii(b,0,8))){s.append(" | Android boot image");if(b.length>=44)s.append(" | kernel=").append(u32(b,8)).append(" | ramdisk=").append(u32(b,12)).append(" | header_v=").append(u32(b,40));}else if(b.length>=8&&"VNDRBOOT".equals(ascii(b,0,8))){s.append(" | vendor_boot image");if(b.length>=16)s.append(" | header_v=").append(u32(b,8)).append(" | page=").append(u32(b,12));}else if(b.length>=4&&u32(b,0)==0xed26ff3aL)s.append(" | Android sparse image");else if(b.length>=4&&b[0]==0x3a&&b[1]==(byte)0xff&&b[2]==0x26&&b[3]==(byte)0xed)s.append(" | Android sparse image");else s.append(" | raw/other image");s.append("\n");return s.toString();}catch(Exception e){return f.getName()+": probe error: "+e+"\n";}}
+ public static String report(File d){StringBuilder s=new StringBuilder();s.append("STAGE56 CUTTLEFISH PROBE\n");s.append(image(new File(d,"boot.img")));s.append(image(new File(d,"init_boot.img")));s.append(image(new File(d,"vendor_boot.img")));s.append(image(new File(d,"super.img")));s.append(image(new File(d,"userdata.img")));s.append(image(new File(d,"vbmeta.img")));s.append("Expected next step: extract kernel/ramdisks/DTB and map Cuttlefish VirtIO devices.\n");return s.toString();}
+}
